@@ -7,7 +7,7 @@ const log = logger({
   loggerService: 'error'
 })
 
-export const errorMiddleware = (
+const ErrorMiddleware = (
   error: HttpException,
   req: Request,
   res: Response,
@@ -15,7 +15,26 @@ export const errorMiddleware = (
 ) => {
   try {
     if (isCelebrateError(error)) {
-      return next(error)
+      const details =
+        error.details.get('body') ||
+        error.details.get('params') ||
+        error.details.get('query')
+
+      const message = details?.details[0]?.message || 'Validation failed'
+
+      const NEW_RECIPE_VALIDATION_ERROR = 'Recipe creation failed!'
+      const status = message === NEW_RECIPE_VALIDATION_ERROR ? 200 : 400
+      const validationMsg =
+        message === NEW_RECIPE_VALIDATION_ERROR
+          ? {
+              required: 'title, making_time, serves, ingredients, cost'
+            }
+          : {}
+
+      return res.status(status).json({
+        message,
+        ...validationMsg
+      })
     }
 
     const status: number = error.status || 500
@@ -26,8 +45,16 @@ export const errorMiddleware = (
       `[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}, Stack:: ${error.stack}`
     )
 
-    res.status(status).json({ message })
+    return res.status(status).json({ message })
   } catch (error) {
     next(error)
   }
 }
+
+export type MiddlewareType = (
+  _req: Request,
+  _res: Response,
+  _next: NextFunction
+) => void
+
+export const errorMiddleware = ErrorMiddleware as unknown as MiddlewareType

@@ -1,12 +1,20 @@
 import { celebrate, Joi } from 'celebrate'
 
+const customErrorMessages = {
+  'string.base': 'Recipe creation failed!',
+  'string.empty': 'Recipe creation failed!',
+  'string.required': 'Recipe creation failed!',
+  'number.base': 'Recipe creation failed!',
+  'number.required': 'Recipe creation failed!',
+  'any.required': 'Recipe creation failed!'
+}
 export const validateCreateRecipe = celebrate({
   body: Joi.object({
-    title: Joi.string().required(),
-    making_time: Joi.string().required(),
-    serves: Joi.string().required(),
-    ingredients: Joi.string().required(),
-    cost: Joi.number().required()
+    title: Joi.string().required().messages(customErrorMessages),
+    making_time: Joi.string().required().messages(customErrorMessages),
+    serves: Joi.string().required().messages(customErrorMessages),
+    ingredients: Joi.string().required().messages(customErrorMessages),
+    cost: Joi.number().required().messages(customErrorMessages)
   }).required()
 })
 
