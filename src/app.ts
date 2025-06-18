@@ -3,6 +3,7 @@ import pino from 'pino-http'
 import { errors } from 'celebrate'
 import { routes } from './routes'
 import { logger } from './utils/logger'
+import { errorMiddleware } from './middlewares/errors.middleware'
 
 const log = logger({ loggerService: 'app' })
 const loggerMiddleware = pino({
@@ -15,4 +16,5 @@ export const app = () =>
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
     .use(routes)
+    .use(errorMiddleware)
     .use(errors())

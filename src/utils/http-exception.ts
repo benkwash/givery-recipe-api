@@ -26,11 +26,6 @@ export const badRequestError = ({
   message
 }: ErrorParams) => new HttpException(status, message)
 
-export const unAuthorizedError = ({
-  status = HTTP_STATUS.UNAUTHORIZED,
-  message
-}: ErrorParams) => new HttpException(status, message)
-
 export const notFoundError = ({
   status = HTTP_STATUS.NOT_FOUND,
   message
