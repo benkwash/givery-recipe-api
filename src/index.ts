@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import { app } from './app'
 import { env } from './config/env.config'
-import { initDb } from './config/db/init-db'
+import { runDbMigrations } from './config/db/migrations'
 import { seedDb } from './config/db/seed-db'
 import { closeDb } from './config/db'
 import { logger } from './utils/logger'
@@ -12,7 +12,7 @@ const { NODE_SERVER_PORT } = env
 
 async function init() {
   try {
-    await initDb()
+    await runDbMigrations()
     await seedDb()
     log.info('Database initialized and seeded successfully')
     await app().listen(NODE_SERVER_PORT, () => {

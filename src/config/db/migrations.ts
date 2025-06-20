@@ -1,6 +1,6 @@
 import { dbClient } from '.'
 
-export const initDb = () =>
+export const runDbMigrations = () =>
   dbClient.exec(`
     DROP TABLE IF EXISTS recipes;
 

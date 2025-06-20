@@ -24,4 +24,4 @@ const v1Routes = Router()
   .get('/:id', validateGetRecipeById, handleAsyncErrors(getRecipeById))
   .delete('/:id', validateDeleteRecipe, handleAsyncErrors(deleteRecipe))
 
-export const recipeRoutes = Router().use('/v1/recipes', v1Routes)
+export const recipeRoutes = Router().use('/recipes', v1Routes)
