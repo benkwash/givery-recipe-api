@@ -5,6 +5,7 @@ import { errors } from 'celebrate'
 import { routes } from './routes'
 import { logger } from './utils/logger'
 import { errorMiddleware } from './middlewares/errors.middleware'
+import { notFoundMiddleware } from './middlewares/not-found.middleware'
 
 const log = logger({ loggerService: 'app' })
 const loggerMiddleware = pino({
@@ -20,3 +21,4 @@ export const app = () =>
     .use(routes)
     .use(errorMiddleware)
     .use(errors())
+    .use(notFoundMiddleware)
