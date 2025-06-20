@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import pino from 'pino-http'
 import { errors } from 'celebrate'
 import { routes } from './routes'
@@ -12,6 +13,7 @@ const loggerMiddleware = pino({
 
 export const app = () =>
   express()
+    .use(cors())
     .use(loggerMiddleware)
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
