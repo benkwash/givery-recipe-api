@@ -35,7 +35,7 @@ A simple Node.js API for managing recipes, using [better-sqlite3](https://github
 3. Create a `.env` file in the project root with the following content:
 
    ```
-   NODE_SERVER_PORT=3000
+   PORT=3000
    NODE_ENV=development
    ```
 

@@ -1,6 +1,6 @@
 import { find, findById, update } from '../../repositories/recipe.repository'
 import { setCache, getCache } from '../../utils/cache'
-import { recipeNotFoundError } from 'src/utils/errors'
+import { recipeNotFoundError } from '../../utils/errors'
 
 export const getRecipes = async () => {
   const recipes = await find()
