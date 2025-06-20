@@ -21,8 +21,8 @@ export const createRecipe = async (req: Request, res: Response) => {
   })
 
   return res.status(HTTP_STATUS.OK).json({
-    message: 'Recipe created successfully',
-    data: [recipe]
+    message: 'Recipe successfully created!',
+    recipe: [recipe]
   })
 }
 
