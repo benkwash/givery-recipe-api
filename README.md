@@ -98,16 +98,6 @@ npm run dev
    docker run -p 3000:3000 --env-file .env recipe-api
    ```
 
-## Project Structure
-
-```
-src/
-  ├── db/           # Database setup and helpers
-  ├── routes/       # API route handlers
-  ├── validators/   # Joi validation schemas
-  ├── index.ts      # App entry point
-```
-
 ##### **Author:** Benkwash
 
 ##### **Contact:** benjaminkwashie@gmail.com
