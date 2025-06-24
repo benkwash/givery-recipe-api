@@ -15,26 +15,7 @@ const ErrorMiddleware = (
 ) => {
   try {
     if (isCelebrateError(error)) {
-      const details =
-        error.details.get('body') ||
-        error.details.get('params') ||
-        error.details.get('query')
-
-      const message = details?.details[0]?.message || 'Validation failed'
-
-      const NEW_RECIPE_VALIDATION_ERROR = 'Recipe creation failed!'
-      const status = message === NEW_RECIPE_VALIDATION_ERROR ? 200 : 400
-      const validationMsg =
-        message === NEW_RECIPE_VALIDATION_ERROR
-          ? {
-              required: 'title, making_time, serves, ingredients, cost'
-            }
-          : {}
-
-      return res.status(status).json({
-        message,
-        ...validationMsg
-      })
+      return next(error)
     }
 
     const status: number = error.status || 500
