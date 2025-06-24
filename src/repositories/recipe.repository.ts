@@ -1,5 +1,5 @@
 import { dbClient } from '../config/db'
-import { Recipe, RecipeWithIdAndTimestamps } from '../usecases/recipe/types'
+import { Recipe, RecipeWithIdAndTimestamps } from '../services/recipe/types'
 
 const COLLECTION_NAME = 'recipes'
 

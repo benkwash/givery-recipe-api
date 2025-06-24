@@ -2,17 +2,17 @@ import { Request, Response } from 'express'
 import { HTTP_STATUS } from '../utils/http-response-statuses'
 
 import {
-  createRecipe as createRecipeUsecase,
-  updateRecipe as updateRecipeUsecase,
-  getRecipes as getRecipesUsecase,
-  getRecipeById as getRecipeByIdUsecase,
-  deleteRecipe as deleteRecipeUsecase
-} from '../usecases/recipe'
+  createRecipe as createRecipeService,
+  updateRecipe as updateRecipeService,
+  getRecipes as getRecipesService,
+  getRecipeById as getRecipeByIdService,
+  deleteRecipe as deleteRecipeService
+} from '../services/recipe'
 
 export const createRecipe = async (req: Request, res: Response) => {
   const { title, making_time, serves, ingredients, cost } = req.body
 
-  const recipe = await createRecipeUsecase({
+  const recipe = await createRecipeService({
     title,
     making_time,
     serves,
@@ -32,7 +32,7 @@ export const updateRecipe = async (req: Request, res: Response) => {
     body: { title, making_time, serves, ingredients, cost }
   } = req
 
-  const updatedRecipe = await updateRecipeUsecase(id, {
+  const updatedRecipe = await updateRecipeService(id, {
     title,
     making_time,
     serves,
@@ -46,7 +46,7 @@ export const updateRecipe = async (req: Request, res: Response) => {
 }
 
 export const getRecipes = async (req: Request, res: Response) => {
-  const recipes = await getRecipesUsecase()
+  const recipes = await getRecipesService()
 
   return res.status(HTTP_STATUS.OK).json({
     recipes
@@ -54,7 +54,7 @@ export const getRecipes = async (req: Request, res: Response) => {
 }
 
 export const getRecipeById = async (req: Request, res: Response) => {
-  const recipe = await getRecipeByIdUsecase(req.params.id)
+  const recipe = await getRecipeByIdService(req.params.id)
 
   return res.status(HTTP_STATUS.OK).json({
     message: `Recipe details by id`,
@@ -65,7 +65,7 @@ export const getRecipeById = async (req: Request, res: Response) => {
 export const deleteRecipe = async (req: Request, res: Response) => {
   const { id } = req.params
 
-  await deleteRecipeUsecase(id)
+  await deleteRecipeService(id)
 
   return res.status(HTTP_STATUS.OK).json({
     message: `Recipe successfully deleted!`
